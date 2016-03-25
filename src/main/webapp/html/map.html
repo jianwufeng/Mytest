@@ -1,0 +1,59 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#l-map{height:300px;width:100%;}
+		#r-result {width:100%;}
+	</style>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=D5b939310cda4811e6587c8a535e1edc"></script>
+	<title>公交/地铁线路查询</title>
+</head>
+<body>
+	<div id="l-map"></div>
+	<div id="r-result"></div>
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("l-map");            // 创建Map实例
+	//map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+	map.centerAndZoom("上海",13);
+
+	var busline = new BMap.BusLineSearch(map,{
+		renderOptions:{map:map,panel:"r-result"},
+			onGetBusListComplete: function(result){
+			   if(result) {
+				 var fstLine = result.getBusListItem(0);//获取第一个公交列表显示到map上
+				 busline.getBusLine(fstLine);
+			   }
+			},
+			onGetBusLineComplete: function(rsa){
+			   var path = rsa.getPath();
+			   for(var i= 0;i<path.length ;i++) {
+	                //debugger;
+	                //console.debug((i + 1) + ',' + path[i].lat + ',' + path[i].lng);
+	                console.debug("insert into iw_subwaypoint(subwaylineId,pointOrder,pointLat,pointLon,pointStatus) values (" + busline.id +  "," + (i + 1) + ",'" + path[i].lat + "','" + path[i].lng + "',1);");
+
+	            }
+			}
+	});
+	function busSearch(){
+		var busName = "11号线";
+		busline.getBusList(busName);
+	}
+	/* function busSearch(busName,id,lineCityCode,cityId){
+        busline.getBusList("" + busName);
+        busline.id = id;
+        busline.busName = busName;
+        busline.lineCityCode = lineCityCode;
+        busline.cityId = cityId;
+        //busline.stationId = stationId;
+        //busline.pointId = pointId;
+    } */
+	setTimeout(function(){
+		busSearch();
+		//busSearch('13号线',253,21,2);
+	},1500);
+</script>
