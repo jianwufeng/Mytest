@@ -22,7 +22,7 @@ public class SolrjServiceTest {
     public void setUp() throws Exception {
         // 在url中指定core名称：taotao
         String url = "http://localhost:8983/solr/taotao";
-        HttpSolrServer httpSolrServer = new HttpSolrServer(url); //定义solr的server
+        HttpSolrServer httpSolrServer = new HttpSolrServer(url); // 定义solr的server
         httpSolrServer.setParser(new XMLResponseParser()); // 设置响应解析器
         httpSolrServer.setMaxRetries(1); // 设置重试次数，推荐设置为1
         httpSolrServer.setConnectionTimeout(500); // 建立连接的最长时间
@@ -51,19 +51,19 @@ public class SolrjServiceTest {
             System.out.println(foo);
         }
     }
-    
+
     @Test
-    public void testJDK(){
+    public void testJDK() {
         MytestService mytest = new MytestServiceImpl();
         ProxyFactory factory = new ProxyFactory(mytest);
-        MytestService service  = (MytestService) factory.getProxy();
-        service.mytest1();
+        MytestService service = (MytestService) factory.getProxy();
+        // service.mytest1();
     }
-    
+
     @Test
-    public void testInterface(){
+    public void testInterface() {
         MytestService mytest = new MytestServiceImpl();
-        mytest.mytest1();
+        // mytest.mytest1();
     }
 
 }
