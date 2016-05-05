@@ -18,27 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/MytestController")
 public class MytestController {
-    
+
     @Autowired
     private MytestService mytestService;
-    
+
     @RequestMapping("/test1")
-    public String test1(HttpServletRequest request,Foo foo){
+    public String test1(HttpServletRequest request, Foo foo) {
         return mytestService.mytest1(foo);
     }
 
-
     /**
-     * 将一个文件的所有内容拷贝到另一个文件中。
-     * 执行三个基本操作:
-     *     首先创建一个 Buffer
-     *     然后从源文件中将数据读到这个缓冲区中
-     *     最后将缓冲区写入目标文件
-     *     程序不断重复(读、写、读、写) 直到源文件结束
+     * NIO 将一个文件的所有内容拷贝到另一个文件中。 执行三个基本操作: 首先创建一个 Buffer 然后从源文件中将数据读到这个缓冲区中 最后将缓冲区写入目标文件 程序不断重复(读、写、读、写) 直到源文件结束
+     * 
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        String infile = "C:\\Users\\Administrator\\Desktop\\house_correct.sql";String outfile = "C:\\Users\\Administrator\\Desktop\\house_correct.txt";
+        String infile = "C:\\Users\\Administrator\\Desktop\\house_correct.sql";
+        String outfile = "C:\\Users\\Administrator\\Desktop\\house_correct.txt";
         // 获取源文件和目标文件的输入输出流
         FileInputStream fin = new FileInputStream(infile);
         FileOutputStream fout = new FileOutputStream(outfile);
