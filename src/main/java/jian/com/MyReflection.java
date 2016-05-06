@@ -8,7 +8,7 @@ import java.util.Map;
 import jian.com.pojo.Foo;
 import jian.com.service.Fruit;
 
-public class MyReflection {
+public class MyReflection<T> {
 
     public static <T> Fruit reflectFactory(T t) {
         Fruit object = null;
