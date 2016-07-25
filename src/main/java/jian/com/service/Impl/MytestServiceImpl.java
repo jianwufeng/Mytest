@@ -6,10 +6,10 @@ import jian.com.service.MytestService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MytestServiceImpl implements MytestService{
+public class MytestServiceImpl implements MytestService {
 
     public String mytest1(Foo foo) {
-        return foo.getId()+"";
+        return foo.getId();
     }
 
 }

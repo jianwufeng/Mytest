@@ -1,4 +1,4 @@
-package jian.com;
+package jian.com.utils;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
 

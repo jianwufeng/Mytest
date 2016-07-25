@@ -26,13 +26,27 @@
      http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd
      http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
      http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.0.xsd">
-     <context:component-scan base-package="jian.com.*" />
-    	<!-- <context:exclude-filter type="regex" expression="com.aiwu.mls.entity.*"/> 
-    </context:component-scan> -->
+    
+    <context:component-scan base-package="jian.com" >
+    	<context:exclude-filter type="regex" expression="jian.com.pojo.*"/> 
+    </context:component-scan>
+    
+    <aop:aspectj-autoproxy />
+    
+    <mvc:annotation-driven />
+    
+    <context:annotation-config />
     
     <!-- 定义无Controller的path<->view直接映射 -->
 	<mvc:view-controller path="/" view-name="redirect:/login"/>
 	
-	<import resource="classpath*:spring/spring-*.xml" />
+	<!-- <import resource="classpath*:spring/spring-*.xml" /> -->
+	
+	<util:properties id="meta" location="classpath:config/metainfo.properties"></util:properties>
+	
+	<bean id="kafkaProducersFactory" class="jian.com.tracking.kafka.KafkaProducersFactory">
+	    <constructor-arg index="0" value="#{meta['kafka.producer.brokerList']}" />
+		<constructor-arg index="1" value="#{meta['kafka.topic.topics']}" />
+	</bean>
     
-     </beans>
+</beans>

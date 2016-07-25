@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import jian.com.pojo.Foo;
 import jian.com.service.MytestService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/MytestController")
 public class MytestController {
 
+    private static final Logger log = LoggerFactory.getLogger(MytestController.class);
     @Autowired
     private MytestService mytestService;
 
     @RequestMapping("/test1")
     public String test1(HttpServletRequest request, Foo foo) {
-        return mytestService.mytest1(foo);
+        log.info("-------------------test------------------");
+        String string = mytestService.mytest1(foo);
+        log.info("返回值 is {} ", string);
+        return "layout";
     }
 
     /**
