@@ -1,10 +1,15 @@
 package jian.com.tracking.collector.kafka;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jian.com.controller.MytestController;
 import jian.com.tracking.TrackingDetailCollectService;
 import jian.com.tracking.impl.TrackingDetailCollectServiceImpl;
+import jian.com.tracking.kafka.KafkaProducersFactory;
 import jian.com.tracking.kafka.constants.TrackingMessageInfo;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:spring.xml" })
+@ContextConfiguration(locations = { "classpath*:spring/spring.xml" })
 public class KafkaProducerTest {
 
     private static final Logger log = LoggerFactory.getLogger(MytestController.class);
@@ -49,7 +54,13 @@ public class KafkaProducerTest {
         messageInfo.setLogEvent(1);
         log.info("brokerList={}", "brokerList");
         for (int i = 0; i < 2; i++) {
-            trackingDetailCollectService.doBatchCollect(messageInfo, "tracking-detail-0");
+            List<String> list = KafkaProducersFactory.msgList.get("tracking-detail-1");
+            if (CollectionUtils.isEmpty(list)) {
+                list = new ArrayList<String>();
+            }
+            list.add(messageInfo.toString());
+            KafkaProducersFactory.msgList.put("tracking-detail-1", list);
         }
+        trackingDetailCollectService.doBatchCollect(messageInfo, "tracking-detail-1");
     }
 }

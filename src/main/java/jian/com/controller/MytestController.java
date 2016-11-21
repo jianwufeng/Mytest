@@ -3,6 +3,7 @@ package jian.com.controller;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -10,10 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import jian.com.pojo.Foo;
 import jian.com.service.MytestService;
+import jian.com.service.Impl.MytestServiceImpl;
+import jian.com.service.Impl.ProxyInvocationHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,12 +24,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MytestController {
 
     private static final Logger log = LoggerFactory.getLogger(MytestController.class);
-    @Autowired
-    private MytestService mytestService;
 
-    @RequestMapping("/test1")
-    public String test1(HttpServletRequest request, Foo foo) {
+    // @Autowired
+    // private MytestService mytestService;
+
+    // @Autowired
+    // private MytestService2Impl mytestService2;
+    //
+    // @RequestMapping("/test1")
+    // public String test1(HttpServletRequest request, Foo foo) {
+    // log.info("-------------------test------------------");
+    // String string = mytestService2.mytest1(foo);
+    // log.info("返回值 is {} ", string);
+    // return "layout";
+    // }
+
+    @RequestMapping("/test2")
+    public String test2(HttpServletRequest request, Foo foo) {
         log.info("-------------------test------------------");
+        MytestService mytestService = (MytestService) Proxy.newProxyInstance(MytestService.class.getClassLoader(), new Class[] { MytestService.class },
+                new ProxyInvocationHandler(new MytestServiceImpl()));
         String string = mytestService.mytest1(foo);
         log.info("返回值 is {} ", string);
         return "layout";

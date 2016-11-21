@@ -39,6 +39,7 @@ public class KafkaProducer {
         log.info("Send BatchedMsg {}  {} : to topic: {}", messages.size(), new Date(), topic);
         for (String msg : messages) {
             producer.send(new KeyedMessage<Integer, String>(topic, msg));
+            log.error(msg);
         }
 
     }

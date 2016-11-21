@@ -11,7 +11,7 @@ public interface TrackingKafkaConstant {
 
     public static final String STRING_ENCODER = "kafka.serializer.StringEncoder";// kafka消息编码器
 
-    public static final Integer PRODUCER_LENGTH = 5;// 批量写入
+    public static final Integer PRODUCER_LENGTH = 1;// 批量写入
     // 异常邮件接收者
     // public static final String MAIL_TO_LIST="jinyishu@meitunmama.com"; //测试环境
     public static final String MAIL_TO_LIST = "bigdata@meitunmama.com"; // 生产环境
