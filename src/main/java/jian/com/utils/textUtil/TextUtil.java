@@ -1,4 +1,4 @@
-package jian.com.utils.des3;
+package jian.com.utils.textUtil;
 
 public class TextUtil {
     public static boolean isEmpty(Object obj) {

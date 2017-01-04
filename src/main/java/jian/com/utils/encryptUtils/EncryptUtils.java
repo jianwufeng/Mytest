@@ -1,4 +1,4 @@
-package jian.com.utils.des3;
+package jian.com.utils.encryptUtils;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

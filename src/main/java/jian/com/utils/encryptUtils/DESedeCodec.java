@@ -1,4 +1,4 @@
-package jian.com.utils.des3;
+package jian.com.utils.encryptUtils;
 
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;

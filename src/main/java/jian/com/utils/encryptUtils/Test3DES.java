@@ -1,4 +1,4 @@
-package jian.com.utils.des3;
+package jian.com.utils.encryptUtils;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
@@ -6,9 +6,9 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 public class Test3DES {
     public static void main(String[] args) {
 
-        String key = "xingjianhong";
+        String key = "aaa";
 
-        String password = "Xing";
+        String password = "aaa";
 
         System.out.println("key=" + key + ",password=" + password);
 
