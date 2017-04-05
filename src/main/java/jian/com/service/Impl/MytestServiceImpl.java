@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MytestServiceImpl implements MytestService {
 
-    public String mytest1(Foo foo) {
+    public Long mytest1(Foo foo) {
         return foo.getId();
     }
 

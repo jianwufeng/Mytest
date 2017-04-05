@@ -33,20 +33,21 @@ public class SolrjServiceTest {
     @Test
     public void testAdd() throws Exception {
         Foo foo = new Foo();
-        foo.setId(System.currentTimeMillis() + "");
-        foo.setTitle("轻量级Java EE企业应用实战（第3版）：Struts2＋Spring3＋Hibernate整合开发（附CD光盘）");
+        foo.setId(System.currentTimeMillis());
+        foo.setTitle("么么java哒");
+        foo.setName("哈哈嘿嘿");
 
         this.solrjService.add(foo);
     }
 
     @Test
     public void testDelete() throws Exception {
-        this.solrjService.delete(Arrays.asList("1312313"));
+        this.solrjService.delete(Arrays.asList("1490939961532"));
     }
 
     @Test
     public void testSearch() throws Exception {
-        List<Foo> foos = this.solrjService.search("Java", 1, 10);
+        List<Foo> foos = this.solrjService.search("轻量级Java EE企业应用实战（第3版）", 1, 10);
         for (Foo foo : foos) {
             System.out.println(foo);
         }

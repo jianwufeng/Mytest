@@ -5,18 +5,23 @@ import javax.validation.constraints.NotNull;
 import org.apache.solr.client.solrj.beans.Field;
 
 public class Foo {
-    @NotNull(message="id不为空")
+    @NotNull(message = "id不为空")
     @Field("id")
-    private String id;
+    private Long id;
 
     @Field("title")
     private String title;
 
-    public String getId() {
+    @Field("name")
+    private String name;
+
+    // private String keyword;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -28,15 +33,17 @@ public class Foo {
         this.title = title;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Foo [id=");
-        builder.append(id);
-        builder.append(", title=");
-        builder.append(title);
-        builder.append("]");
-        return builder.toString();
+        return "Foo [id=" + id + ", title=" + title + ", name=" + name + "]";
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

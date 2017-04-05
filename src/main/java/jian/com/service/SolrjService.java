@@ -1,7 +1,6 @@
 package jian.com.service;
 
 import java.util.List;
-import java.util.Map;
 
 import jian.com.pojo.Foo;
 
@@ -26,23 +25,27 @@ public class SolrjService {
      * @throws Exception
      */
     public void add(Foo foo) throws Exception {
-        this.httpSolrServer.addBean(foo); //添加数据到solr服务器
-        this.httpSolrServer.commit(); //提交
+        this.httpSolrServer.addBean(foo); // 添加数据到solr服务器
+        this.httpSolrServer.commit(); // 提交
     }
 
     public void delete(List<String> ids) throws Exception {
         this.httpSolrServer.deleteById(ids);
-        this.httpSolrServer.commit(); //提交
+        // this.httpSolrServer.deleteByQuery("id:1490930449437");
+        this.httpSolrServer.commit(); // 提交
     }
 
     public List<Foo> search(String keywords, Integer page, Integer rows) throws Exception {
-        SolrQuery solrQuery = new SolrQuery(); //构造搜索条件
-        solrQuery.setQuery("title:" + keywords); //搜索关键词
+        SolrQuery solrQuery = new SolrQuery(); // 构造搜索条件
+        // solrQuery.setQuery("keyword:" + keywords); // 搜索关键词
+        solrQuery.setQuery("name:" + keywords);
+        // solrQuery.setFilterQueries("id:[1490930871789 TO 1490932540467]");
+
         // 设置分页 start=0就是从0开始，，rows=5当前返回5条记录，第二页就是变化start这个值为5就可以了。
         solrQuery.setStart((Math.max(page, 1) - 1) * rows);
         solrQuery.setRows(rows);
 
-        //是否需要高亮
+        // 是否需要高亮
         boolean isHighlighting = !StringUtils.equals("*", keywords) && StringUtils.isNotEmpty(keywords);
 
         if (isHighlighting) {
@@ -56,19 +59,19 @@ public class SolrjService {
         // 执行查询
         QueryResponse queryResponse = this.httpSolrServer.query(solrQuery);
         List<Foo> foos = queryResponse.getBeans(Foo.class);
-        if (isHighlighting) {
-            // 将高亮的标题数据写回到数据对象中
-            Map<String, Map<String, List<String>>> map = queryResponse.getHighlighting();
-            for (Map.Entry<String, Map<String, List<String>>> highlighting : map.entrySet()) {
-                for (Foo foo : foos) {
-                    if (!highlighting.getKey().equals(foo.getId().toString())) {
-                        continue;
-                    }
-                    foo.setTitle(StringUtils.join(highlighting.getValue().get("title"), ""));
-                    break;
-                }
-            }
-        }
+        // if (isHighlighting) {
+        // // 将高亮的标题数据写回到数据对象中
+        // Map<String, Map<String, List<String>>> map = queryResponse.getHighlighting();
+        // for (Map.Entry<String, Map<String, List<String>>> highlighting : map.entrySet()) {
+        // for (Foo foo : foos) {
+        // if (!highlighting.getKey().equals(foo.getId().toString())) {
+        // continue;
+        // }
+        // foo.setTitle(StringUtils.join(highlighting.getValue().get("title"), ""));
+        // break;
+        // }
+        // }
+        // }
 
         return foos;
     }

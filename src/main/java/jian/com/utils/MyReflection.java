@@ -36,7 +36,7 @@ public class MyReflection {
          * String name = "jian.com.service.Impl.AppleImp"; Fruit fruit = reflectFactory(name); fruit.eat();
          */
         Foo foo = new Foo();
-        foo.setId("1");
+        foo.setId(1L);
         foo.setTitle("listConvertMap");
         Foo foo2 = listConvertMap("1", foo);
         System.out.println(foo2.getId() + foo2.getTitle());

@@ -44,7 +44,7 @@ public class MytestController {
         log.info("-------------------test------------------");
         MytestService mytestService = (MytestService) Proxy.newProxyInstance(MytestService.class.getClassLoader(), new Class[] { MytestService.class },
                 new ProxyInvocationHandler(new MytestServiceImpl()));
-        String string = mytestService.mytest1(foo);
+        Long string = mytestService.mytest1(foo);
         log.info("返回值 is {} ", string);
         return "layout";
     }

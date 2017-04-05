@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 /**
  * 处理kafka消息的消费者工厂
  * 
- * @author luxiaoming
  *
  */
 public class TrackingMessageConsumerFactory {
@@ -86,10 +85,11 @@ public class TrackingMessageConsumerFactory {
                 while (it.hasNext()) {
                     String message = new String(it.next().message());
                     for (TrackingDetailProcessService srv : trackingDetailProcessServices) {
-                        /*
-                         * LOGGER.error("========================="); LOGGER.error(message);
-                         * LOGGER.error("=========================");
-                         */
+
+                        LOGGER.error("=========================");
+                        LOGGER.error(message);
+                        LOGGER.error("=========================");
+
                         srv.doProcess(message);
                     }
                 }
@@ -115,5 +115,4 @@ public class TrackingMessageConsumerFactory {
         // }
         // }).start();
     }
-
 }
