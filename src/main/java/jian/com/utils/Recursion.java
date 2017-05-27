@@ -8,10 +8,11 @@ package jian.com.utils;
 public class Recursion {
 
     public static void main(String[] args) {
-        // decimalToBinary(103);// 十进制转换二进制
+        decimalToBinary(15);// 十进制转换二进制
         // System.out.println(sum(100));// 求和
         // yueshu(100, 80); // 求最大公约数
-        hanon(4, 'A', 'B', 'C'); // 求汉诺塔算法
+        // hanon(4, 'A', 'B', 'C'); // 求汉诺塔算法
+        // lingxing(5);
     }
 
     // 递归方法decimalToBinary，把一个十进制数转换成二进制数
@@ -63,5 +64,35 @@ public class Recursion {
 
     public static void move(int n, char a, char c) {
         System.out.println(n + ":" + a + "-->" + c);// 打印移动盘子情况
+    }
+
+    // 打印出菱形
+    static void lingxing(int n) {
+        int i, j, k;
+
+        // 先打印出上半部分
+        for (i = 1; i <= n; i++) {
+
+            for (j = 1; j <= n - i; j++)
+                System.out.print(" "); // 打印空格
+
+            for (k = 1; k <= 2 * i - 1; k++)
+                System.out.print("*"); // 空格后打印*
+
+            System.out.println("");// 换行
+
+        }
+
+        // 打印出下半部分
+        for (i = 1; i <= n - 1; i++) {
+
+            for (j = 1; j <= i; j++)
+                System.out.print(" ");
+
+            for (k = 1; k <= (2 * n - 1) - 2 * i; k++)
+                System.out.print("*");
+
+            System.out.println(""); // 换行
+        }
     }
 }
